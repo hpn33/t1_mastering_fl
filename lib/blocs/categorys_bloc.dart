@@ -1,18 +1,28 @@
 import 'dart:async';
 
+import 'package:t1_mastering_fl/api/db_api.dart';
 import 'package:t1_mastering_fl/models/Category.dart';
 import 'package:t1_mastering_fl/widgets/bloc_provider.dart';
 
 class CategoryBloc implements BlocBase {
+  List<Category> _categories;
 
-  List<Category> _categores;
+  var _categoriesController = StreamController<List<Category>>();
+  get _inCategories => _categoriesController.sink;
+  get _outCategories => _categoriesController.stream;
 
-  var _categoresController = StreamController<List<Category>>();
-  get _inCategores => _categoresController.sink;
-  get _outCategores => _categoresController.stream;
+  CategoryBloc() {
+    getCategories();
+  }
 
   @override
-    void dispose() {
-      _categoresController.close();
+  void dispose() {
+    _categoriesController.close();
+  }
+
+  void getCategories() {
+    var dbApi = DbApi();
+    _categories = dbApi.getCategories();
+    _inCategories.add(_categories);
   }
 }
