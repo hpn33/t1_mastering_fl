@@ -9,7 +9,7 @@ class CategoriesBloc implements BlocBase {
 
   var _categoriesController = StreamController<List<Category>>();
   get _inCategories => _categoriesController.sink;
-  get _outCategories => _categoriesController.stream;
+  get outCategories => _categoriesController.stream;
 
   CategoriesBloc() {
     getCategories();
