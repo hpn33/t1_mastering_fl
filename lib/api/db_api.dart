@@ -1,6 +1,6 @@
 import 'package:t1_mastering_fl/models/Category.dart';
 
-class DdApi {
+class DbApi {
   List<Category> getCategorys() {
 
     List<Category> tempCategory = [];
