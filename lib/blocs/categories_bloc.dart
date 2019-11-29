@@ -4,14 +4,14 @@ import 'package:t1_mastering_fl/api/db_api.dart';
 import 'package:t1_mastering_fl/models/Category.dart';
 import 'package:t1_mastering_fl/widgets/bloc_provider.dart';
 
-class CategoryBloc implements BlocBase {
+class CategoriesBloc implements BlocBase {
   List<Category> _categories;
 
   var _categoriesController = StreamController<List<Category>>();
   get _inCategories => _categoriesController.sink;
   get _outCategories => _categoriesController.stream;
 
-  CategoryBloc() {
+  CategoriesBloc() {
     getCategories();
   }
 

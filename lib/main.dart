@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:t1_mastering_fl/blocs/categories_bloc.dart';
 import 'package:t1_mastering_fl/pages/home_page.dart';
+import 'package:t1_mastering_fl/widgets/bloc_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: BlocProvider(
+        bloc: CategoriesBloc(),
+        child: HomePage(),
+      ),
     );
   }
 }
