@@ -4,12 +4,7 @@ import 'package:t1_mastering_fl/models/product.dart';
 import 'package:t1_mastering_fl/widgets/bloc_provider.dart';
 
 class SelectedCategoryPage extends StatelessWidget {
-  const SelectedCategoryPage({
-    Key key,
-    @required this.products,
-  }) : super(key: key);
-  final List<Product> products;
-
+  
   @override
   Widget build(BuildContext context) {
     final _productBloc = BlocProvider.of<ProductsBloc>(context);
