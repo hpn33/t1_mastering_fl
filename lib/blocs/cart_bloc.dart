@@ -12,8 +12,14 @@ class CartBloc implements BlocBase {
   Sink<List<Product>> get _inProducts => _productsController.sink;
   Stream<List<Product>> get outProducts => _productsController.stream;
 
+  final _countController = BehaviorSubject<int>();
+  get _inCount => _countController.sink;
+  get outCount => _countController.stream;
+
+
   @override
   void dispose() {
     _productsController.close();
+    _countController.close();
   }
 }
