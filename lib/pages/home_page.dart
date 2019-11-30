@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:t1_mastering_fl/api/db_api.dart';
 import 'package:t1_mastering_fl/blocs/categories_bloc.dart';
 import 'package:t1_mastering_fl/models/Category.dart';
+import 'package:t1_mastering_fl/models/product.dart';
 import 'package:t1_mastering_fl/pages/selected_category_page.dart';
 import 'package:t1_mastering_fl/widgets/bloc_provider.dart';
 
@@ -27,7 +28,13 @@ class HomePage extends StatelessWidget {
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                SelectedCategoryPage()),
+                                SelectedCategoryPage(
+                                  products: [
+                                    Product.create('product'),
+                                    Product.create('product'),
+                                    Product.create('product'),
+                                  ],
+                                )),
                       ),
                       title: Text(
                         categories.data[index].name,
