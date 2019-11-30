@@ -17,7 +17,7 @@ class ProductsBloc implements BlocBase {
   }
 
   void getProducts(Category category) {
-    var db = DbApi();
+    var db = DbApi.instance;
     _products = db.getProducts(category);
     _inProducts.add(_products);
   }

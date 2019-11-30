@@ -21,7 +21,7 @@ class CategoriesBloc implements BlocBase {
   }
 
   void getCategories() {
-    var dbApi = DbApi();
+    var dbApi = DbApi.instance;
     _categories = dbApi.getCategories();
     _inCategories.add(_categories);
   }

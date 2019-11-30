@@ -3,6 +3,8 @@ import 'package:t1_mastering_fl/models/product.dart';
 
 class DbApi {
 
+  static final instance = DbApi();
+
   List<Category> getCategories() {
 
     List<Category> tempCategory = [];
