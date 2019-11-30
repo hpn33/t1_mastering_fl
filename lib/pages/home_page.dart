@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:t1_mastering_fl/api/db_api.dart';
 import 'package:t1_mastering_fl/blocs/categories_bloc.dart';
+import 'package:t1_mastering_fl/blocs/products_bloc.dart';
 import 'package:t1_mastering_fl/models/Category.dart';
 import 'package:t1_mastering_fl/models/product.dart';
 import 'package:t1_mastering_fl/pages/selected_category_page.dart';
@@ -27,14 +28,12 @@ class HomePage extends StatelessWidget {
                     return ListTile(
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                SelectedCategoryPage(
-                                  products: [
-                                    Product.create('product'),
-                                    Product.create('product'),
-                                    Product.create('product'),
-                                  ],
-                                )),
+                          builder: (BuildContext context) =>
+                              BlocProvider<ProductsBloc>(
+                            child: SelectedCategoryPage(),
+                            bloc: ProductsBloc(categories.data[index]),
+                          ),
+                        ),
                       ),
                       title: Text(
                         categories.data[index].name,

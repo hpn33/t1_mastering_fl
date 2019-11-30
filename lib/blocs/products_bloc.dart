@@ -10,7 +10,7 @@ class ProductsBloc implements BlocBase {
 
   final _productController = StreamController<List<Product>>();
   get _inProducts => _productController.sink;
-  get _outProducts => _productController.stream;
+  get outProducts => _productController.stream;
 
   ProductsBloc(Category category) {
     getProducts(category);
