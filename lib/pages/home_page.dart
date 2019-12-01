@@ -9,36 +9,31 @@ import 'package:t1_mastering_fl/widgets/CartButton.dart';
 import 'package:t1_mastering_fl/widgets/bloc_provider.dart';
 
 class HomePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final _categoriesBloc = BlocProvider.of<CategoriesBloc>(context);
 
     return Scaffold(
-        appBar: AppBar(title: Text('E-commerce'),
-        actions: <Widget>[
-          CartButton(),
-        ],),
-        body: StreamBuilder(
+        appBar: AppBar(
+          title: Text('E-commerce'),
+          actions: <Widget>[
+            CartButton(),
+          ],
+        ),
+        body: StreamBuilder<List<Category>>(
           stream: _categoriesBloc.outCategories,
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Category>> categories) {
+          builder: (context, categories) {
             if (categories.hasData) {
+              final categorys = categories.data;
               return ListView.builder(
-                  itemCount: categories.data.length,
+                  itemCount: categorys.length,
                   itemBuilder: (context, index) {
+                    final category = categorys[index];
                     return ListTile(
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              BlocProvider<ProductsBloc>(
-                            child: SelectedCategoryPage(),
-                            bloc: ProductsBloc(categories.data[index]),
-                          ),
-                        ),
-                      ),
+                      onTap: () =>
+                          navigateToSelectedCategory(context, category),
                       title: Text(
-                        categories.data[index].name,
+                        category.name,
                         style: TextStyle(fontSize: 24),
                       ),
                     );
@@ -46,6 +41,21 @@ class HomePage extends StatelessWidget {
             }
             return SizedBox();
           },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.arrow_forward),
         ));
+  }
+
+  navigateToSelectedCategory(BuildContext context, Category category) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => BlocProvider<ProductsBloc>(
+          child: SelectedCategoryPage(),
+          bloc: ProductsBloc(category),
+        ),
+      ),
+    );
   }
 }
