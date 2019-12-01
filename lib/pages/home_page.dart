@@ -4,19 +4,21 @@ import 'package:t1_mastering_fl/api/db_api.dart';
 import 'package:t1_mastering_fl/blocs/categories_bloc.dart';
 import 'package:t1_mastering_fl/blocs/products_bloc.dart';
 import 'package:t1_mastering_fl/models/Category.dart';
-import 'package:t1_mastering_fl/models/product.dart';
 import 'package:t1_mastering_fl/pages/selected_category_page.dart';
+import 'package:t1_mastering_fl/widgets/CartButton.dart';
 import 'package:t1_mastering_fl/widgets/bloc_provider.dart';
 
 class HomePage extends StatelessWidget {
-  final dbApi = DbApi();
 
   @override
   Widget build(BuildContext context) {
     final _categoriesBloc = BlocProvider.of<CategoriesBloc>(context);
 
     return Scaffold(
-        appBar: AppBar(title: Text('E-commerce')),
+        appBar: AppBar(title: Text('E-commerce'),
+        actions: <Widget>[
+          CartButton(),
+        ],),
         body: StreamBuilder(
           stream: _categoriesBloc.outCategories,
           builder:
