@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:t1_mastering_fl/api/db_api.dart';
 import 'package:t1_mastering_fl/blocs/categories_bloc.dart';
 import 'package:t1_mastering_fl/blocs/products_bloc.dart';
 import 'package:t1_mastering_fl/models/Category.dart';

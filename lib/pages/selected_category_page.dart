@@ -26,11 +26,26 @@ class SelectedCategoryPage extends StatelessWidget {
                     crossAxisCount: 2),
                 itemBuilder: (context, index) {
                   final product = snapshot.data[index];
-                  return InkWell(
-                    onTap: () => _cartBloc.addProduct(product),
-                    child: Center(
-                      child: Text(snapshot.data[index].name),
-                    ),
+                  return Stack(
+                    children: <Widget>[
+                      Positioned.fill(
+                        child: Image.network(
+                          product.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned.fill(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () => _cartBloc.addProduct(product),
+                            child: Center(
+                              child: Text(snapshot.data[index].name),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 },
                 itemCount: snapshot.data.length,
