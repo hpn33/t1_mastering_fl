@@ -21,42 +21,44 @@ class SelectedCategoryPage extends StatelessWidget {
       body: StreamBuilder<List<Product>>(
           stream: _productBloc.outProducts,
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  final product = snapshot.data[index];
-                  return Stack(
-                    children: <Widget>[
-                      Positioned.fill(
-                        child: Image.network(
-                          product.imageUrl,
-                          fit: BoxFit.cover,
+            if (snapshot.hasError) return Text(snapshot.error);
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator(),);
+              default:
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) {
+                    final product = snapshot.data[index];
+                    return Stack(
+                      children: <Widget>[
+                        Positioned.fill(
+                          child: Image.network(
+                            product.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      Positioned.fill(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () => _cartBloc.addProduct(product),
-                            child: Center(
-                              child: Text(
-                                snapshot.data[index].name,
-                                style: theme.primaryTextTheme.title
-                                    .copyWith(color: Colors.black),
+                        Positioned.fill(
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () => _cartBloc.addProduct(product),
+                              child: Center(
+                                child: Text(
+                                  snapshot.data[index].name,
+                                  style: theme.primaryTextTheme.title
+                                      .copyWith(color: Colors.black),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: snapshot.data.length,
-              );
-            } else {
-              return SizedBox();
+                      ],
+                    );
+                  },
+                  itemCount: snapshot.data.length,
+                );
             }
           }),
     );

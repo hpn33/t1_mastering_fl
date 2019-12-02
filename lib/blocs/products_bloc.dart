@@ -33,7 +33,7 @@ class ProductsBloc implements BlocBase {
       }
       _products.clear();
       _products.addAll(tempProducts);
-      _inProducts.add(_products);
+      //_inProducts.add(_products);
     });
   }
 
