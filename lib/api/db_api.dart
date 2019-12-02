@@ -40,7 +40,7 @@ class DbApi {
   Stream<QuerySnapshot> getProducts(Category category) {
     var db = Firestore.instance;
     try {
-      var querySnapshot = db.collection('Categories').snapshots();
+      var querySnapshot = db.collection('Categories').document(category.id).collection('parts').snapshots();
       return querySnapshot;
     } catch (e) {
       print(e);
