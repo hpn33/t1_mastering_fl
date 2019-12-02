@@ -10,6 +10,7 @@ class SelectedCategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _productBloc = BlocProvider.of<ProductsBloc>(context);
     final _cartBloc = BlocProvider.of<CartBloc>(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +41,11 @@ class SelectedCategoryPage extends StatelessWidget {
                           child: InkWell(
                             onTap: () => _cartBloc.addProduct(product),
                             child: Center(
-                              child: Text(snapshot.data[index].name),
+                              child: Text(
+                                snapshot.data[index].name,
+                                style: theme.primaryTextTheme.title
+                                    .copyWith(color: Colors.black),
+                              ),
                             ),
                           ),
                         ),
